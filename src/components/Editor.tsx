@@ -7,9 +7,10 @@ type EditorProps = {
 }
 
 const Editor = (props: EditorProps) => {
+  console.log(props.data)
+
   return (
     <div className='editor'>
-      <FieldGroup />
       <div className='add-fields-button'>+</div>
     </div>
   )
