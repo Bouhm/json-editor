@@ -1,18 +1,21 @@
 import React from 'react'
 import FieldGroup from './FieldGroup'
 import Field from './Field'
+import { FelaComponent } from 'react-fela'
 
 type EditorProps = {
   data: object // JSON data
 }
 
 const Editor = (props: EditorProps) => {
-  console.log(props.data)
+  const style = {
+    maxWidth: '75%'
+  }
 
   return (
-    <div className='editor'>
+    <FelaComponent style={style}>
       <div className='add-fields-button'>+</div>
-    </div>
+    </FelaComponent>
   )
 }
 
