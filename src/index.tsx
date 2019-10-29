@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import { Provider } from 'react-fela'
 import { createRenderer } from 'fela'
 import App from './App'
+import './index.css'
 
 const renderer = createRenderer()
 

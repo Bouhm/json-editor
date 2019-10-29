@@ -1,21 +1,36 @@
 import React from 'react'
-import FieldGroup from './FieldGroup'
+import FieldBlock from './FieldBlock'
 import Field from './Field'
 import { FelaComponent } from 'react-fela'
+import { JSXElement } from '@babel/types'
+
+export interface IData {
+  [key: string]: any
+}
 
 type EditorProps = {
-  data: object // JSON data
+  data: IData
 }
 
 const Editor = (props: EditorProps) => {
   const style = {
-    maxWidth: '75%'
+    padding: '1em',
+    width: '7 0%',
+    minWidth: '50em',
+    overflow: 'auto',
+    backgroundColor: '#1e1e1e',
+    boxShadow: 'inset 0 0 5px #101010',
+    borderRadius: '5px',
+    fontSize: '16px'
   }
 
   return (
-    <FelaComponent style={style}>
-      <div className='add-fields-button'>+</div>
-    </FelaComponent>
+    <div style={style}>
+      {Object.keys(props.data).map(key => (
+        <FieldBlock key={key} field={{ [key]: props.data[key] }} />
+      ))}
+      <div>+</div>
+    </div>
   )
 }
 
