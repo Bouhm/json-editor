@@ -9,7 +9,9 @@ type FieldProps = {
 const Field = (props: FieldProps) => {
   const { name, value } = props
 
-  const style = {}
+  const style = {
+    backgroundColor: '#2e2e2e'
+  }
 
   return (
     <FelaComponent style={style}>

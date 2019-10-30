@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import Editor from './components/Editor'
 import { FelaComponent } from 'react-fela'
+
+import Editor from './components/Editor'
+import Sidebar from './components/Sidebar'
 import sampleData from './data.json'
 
 const App: React.FC = () => {
@@ -16,6 +18,7 @@ const App: React.FC = () => {
 
   return (
     <FelaComponent style={style}>
+      <Sidebar />
       <Editor data={sampleData} />
     </FelaComponent>
   )

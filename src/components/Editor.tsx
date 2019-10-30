@@ -2,7 +2,6 @@ import React from 'react'
 import FieldBlock from './FieldBlock'
 import Field from './Field'
 import { FelaComponent } from 'react-fela'
-import { JSXElement } from '@babel/types'
 
 type EditorProps = {
   data: any
@@ -10,6 +9,7 @@ type EditorProps = {
 
 const Editor = (props: EditorProps) => {
   const style = {
+    flex: '5',
     padding: '1em',
     width: '7 0%',
     minWidth: '50em',
@@ -33,7 +33,6 @@ const Editor = (props: EditorProps) => {
           />
         )
       })}
-      <button>+</button>
     </div>
   )
 }
