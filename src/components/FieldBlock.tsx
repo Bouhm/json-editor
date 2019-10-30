@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { FelaComponent } from 'react-fela'
 import Field from './Field'
 import { isArray } from 'util'
 
@@ -17,7 +18,10 @@ const FieldBlock = (props: FieldBlockProps) => {
   }
 
   const style = {
-    marginLeft: '1.5em',
+    marginLeft: '1.5em'
+  }
+
+  const labelStyle = {
     ':hover': {
       backgroundColor: '#232323',
       cursor: 'pointer'
@@ -28,9 +32,11 @@ const FieldBlock = (props: FieldBlockProps) => {
     <div style={style}>
       {typeof field === 'object' ? (
         <>
-          <label onClick={handleClick}>
-            {isArray ? `${parseInt(name) + 1}.` : `${name}:`}
-          </label>
+          <FelaComponent style={labelStyle}>
+            <span onClick={handleClick}>
+              {isArray ? `${parseInt(name) + 1}.` : `${name}:`}
+            </span>
+          </FelaComponent>
           {!isCollapsed &&
             Object.keys(field).map(key => (
               <FieldBlock
