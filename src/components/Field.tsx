@@ -3,7 +3,7 @@ import { FelaComponent } from 'react-fela'
 
 type FieldProps = {
   name: string
-  value: string | number | boolean
+  value: string | number | boolean | undefined
 }
 
 const Field = (props: FieldProps) => {
@@ -12,17 +12,13 @@ const Field = (props: FieldProps) => {
   const style = {
     ':hover': {
       backgroundColor: '#232323'
-    },
-    'focus-within': {
-      backgroundColor: '#262626',
-      border: 'none',
-      outline: 'none'
     }
   }
 
   return (
     <FelaComponent style={style}>
-      {name}: {value}
+      <label>{name}</label>:{' '}
+      <input type='text' value={value ? value.toString() : ''} name={name} />
     </FelaComponent>
   )
 }

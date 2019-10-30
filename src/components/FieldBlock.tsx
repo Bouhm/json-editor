@@ -1,27 +1,37 @@
 import React from 'react'
 import Field from './Field'
 import { IData } from './Editor'
+import { isArray } from 'util'
 
 type FieldBlockProps = {
-  field: IData
+  name: string
+  field: any
+  isArray: boolean
 }
 
 const FieldBlock = (props: FieldBlockProps) => {
-  const { field } = props
-  const fieldName: string = Object.keys(field)[0]
-  const fieldVal = field[fieldName]
+  const { field, name, isArray } = props
+
+  const style = {
+    marginLeft: '1.5em'
+  }
 
   return (
-    <div>
-      {typeof fieldVal === 'object' ? (
+    <div style={style}>
+      {typeof field === 'object' ? (
         <>
-          {fieldVal.length === 1 && fieldName}
-          {Object.keys(fieldVal).map(key => (
-            <FieldBlock key={key} field={{ [key]: fieldVal[key] }} />
+          <label>{isArray ? `${parseInt(name) + 1}.` : `${name}:`}</label>
+          {Object.keys(field).map(key => (
+            <FieldBlock
+              key={key}
+              name={key}
+              isArray={Array.isArray(field)}
+              field={field[key]}
+            />
           ))}
         </>
       ) : (
-        <Field name={fieldName} value={fieldVal} />
+        <Field name={name} value={field} />
       )}
     </div>
   )

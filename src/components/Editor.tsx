@@ -26,9 +26,17 @@ const Editor = (props: EditorProps) => {
 
   return (
     <div style={style}>
-      {Object.keys(props.data).map(key => (
-        <FieldBlock key={key} field={{ [key]: props.data[key] }} />
-      ))}
+      {Object.keys(props.data).map(key => {
+        const field = props.data[key]
+        return (
+          <FieldBlock
+            key={key}
+            name={key}
+            isArray={Array.isArray(field)}
+            field={field}
+          />
+        )
+      })}
       <div>+</div>
     </div>
   )
