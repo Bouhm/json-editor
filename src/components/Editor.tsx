@@ -4,12 +4,8 @@ import Field from './Field'
 import { FelaComponent } from 'react-fela'
 import { JSXElement } from '@babel/types'
 
-export interface IData {
-  [key: string]: any
-}
-
 type EditorProps = {
-  data: IData
+  data: any
 }
 
 const Editor = (props: EditorProps) => {
@@ -37,7 +33,7 @@ const Editor = (props: EditorProps) => {
           />
         )
       })}
-      <div>+</div>
+      <button>+</button>
     </div>
   )
 }

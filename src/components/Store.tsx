@@ -1,27 +1,27 @@
-import React from 'react'
+import React, { useReducer } from 'react'
 import { JSXElement } from '@babel/types'
 
 interface IState {
   data: any
 }
 
-const initialState: IState = {
+export const initialState: IState = {
   data: {}
 }
 
 export const Store = React.createContext(initialState)
 
-const reducer = (state: any, action: any) {
-  switch(action.type) {
+export const reducer = (state: any, action: any) => {
+  switch (action.type) {
     case 'CHANGE_DATA':
-      return { ...state, data: action.payload}
+      return { ...state, data: action.payload }
     default:
       return state
   }
 }
 
-export function StoreProvider(props: any): JSX.Element {
-  return (
-    <Store.Provider data={initialState.data}>{props.children}</Store.Provider>
-  )
+export const StoreProvider = (props: any): JSX.Element => {
+  const [state, dispatch] = useReducer(reducer, initialState)
+
+  return <Store.Provider value={initialState}>{props.children}</Store.Provider>
 }

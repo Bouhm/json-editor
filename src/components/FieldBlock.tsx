@@ -1,6 +1,5 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Field from './Field'
-import { IData } from './Editor'
 import { isArray } from 'util'
 
 type FieldBlockProps = {
@@ -11,24 +10,36 @@ type FieldBlockProps = {
 
 const FieldBlock = (props: FieldBlockProps) => {
   const { field, name, isArray } = props
+  const [isCollapsed, setCollapsed] = useState(false)
+
+  const handleClick = () => {
+    setCollapsed(!isCollapsed)
+  }
 
   const style = {
-    marginLeft: '1.5em'
+    marginLeft: '1.5em',
+    ':hover': {
+      backgroundColor: '#232323',
+      cursor: 'pointer'
+    }
   }
 
   return (
     <div style={style}>
       {typeof field === 'object' ? (
         <>
-          <label>{isArray ? `${parseInt(name) + 1}.` : `${name}:`}</label>
-          {Object.keys(field).map(key => (
-            <FieldBlock
-              key={key}
-              name={key}
-              isArray={Array.isArray(field)}
-              field={field[key]}
-            />
-          ))}
+          <label onClick={handleClick}>
+            {isArray ? `${parseInt(name) + 1}.` : `${name}:`}
+          </label>
+          {!isCollapsed &&
+            Object.keys(field).map(key => (
+              <FieldBlock
+                key={key}
+                name={key}
+                isArray={Array.isArray(field)}
+                field={field[key]}
+              />
+            ))}
         </>
       ) : (
         <Field name={name} value={field} />
