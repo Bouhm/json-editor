@@ -1,9 +1,10 @@
 import React, { useState, useContext } from 'react'
-import { reducer, initialState } from './Store'
 import { Store } from './Store'
 
-const useInput = (initialValue: string, context: string[]) => {
-  const [inputVal, setInputVal] = useState(initialValue)
+export type ValueType = any
+
+const useInput = (initialValue: ValueType, context: string[]) => {
+  const [inputVal, setInputVal] = useState<ValueType>(initialValue)
   const [state, dispatch] = useContext(Store)
 
   const handleInputChange = (e: React.FormEvent<HTMLInputElement>) => {

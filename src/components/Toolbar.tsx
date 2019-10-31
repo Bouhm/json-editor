@@ -1,7 +1,4 @@
 import React from 'react'
-import FieldBlock from './FieldBlock'
-import Field from './Field'
-import { FelaComponent } from 'react-fela'
 
 const Toolbar = () => {
   const style = {

@@ -1,19 +1,18 @@
-import React, { useState, useContext } from 'react'
+import React from 'react'
 import { FelaComponent } from 'react-fela'
-import useInput from './useInput'
+import useInput, { ValueType } from './useInput'
 
 type FieldProps = {
   name: string
   value: any
-  context: any
-  //field: any
+  parentKeys: string[]
 }
 
 const Field = (props: FieldProps) => {
-  const { name, value, context } = props
+  const { name, value, parentKeys } = props
   const { inputVal, handleInputChange, handleInputBlur } = useInput(
     value,
-    context
+    parentKeys
   )
 
   const styles = {

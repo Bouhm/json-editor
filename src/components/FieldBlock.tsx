@@ -1,18 +1,26 @@
-import React, { useState, ReactNode } from 'react'
+import React, { useState } from 'react'
 import { FelaComponent } from 'react-fela'
 import Field from './Field'
-import { symbol } from 'prop-types'
 
 type FieldBlockProps = {
   name: string
   field: any
   isArrayItem: boolean
+  isLastItem: boolean
   showBorder?: boolean
-  context: any // An array of keys to keep track of which portion of data
+  parentLength: number
+  parentKeys: string[] // An array of keys to keep track of which portion of data
 }
 
 const FieldBlock = (props: FieldBlockProps) => {
-  const { field, name, context, isArrayItem, showBorder = true } = props
+  const {
+    field,
+    name,
+    parentKeys,
+    isArrayItem,
+    isLastItem,
+    showBorder = true
+  } = props
   const [isCollapsed, setCollapsed] = useState(false)
 
   const handleClick = () => {
@@ -42,51 +50,49 @@ const FieldBlock = (props: FieldBlockProps) => {
 
   // Wraps label and block in brackets depending on object type
   const BracketsWrapper = (props: any) => {
+    const bracket = Array.isArray(props.field) ? ['[', ']'] : ['{', '}']
+
     return (
       <>
-        <FelaComponent style={styles.blockLabel}>
+        <FelaComponent
+          style={isArrayItem ? styles.blockIndex : styles.blockLabel}
+        >
           <div onClick={handleClick}>
-            {isArrayItem ? (
-              <span style={styles.blockIndex}>{`${parseInt(name)}.`}</span>
-            ) : (
-              <>
-                {name}
-                <span style={styles.brackets}>
-                  {Array.isArray(props.field) ? ': [' : ': {'}
-                </span>
-              </>
-            )}
+            {name}
+            <span style={styles.brackets}>: {bracket[0]}</span>
           </div>
         </FelaComponent>
         {props.children}
-        {!isArrayItem && (
-          <span style={styles.brackets}>
-            {Array.isArray(props.field) ? ']' : '}'}
-          </span>
-        )}
+        <span style={styles.brackets}>
+          {bracket[1] + (isLastItem ? '' : ',')}
+        </span>
       </>
     )
   }
+
+  const keys = Object.keys(field)
 
   return (
     <div style={styles.fieldBlock}>
       {typeof field === 'object' ? (
         <BracketsWrapper field={field}>
           {!isCollapsed &&
-            Object.keys(field).map(key => {
+            keys.map((key, i) => {
               return (
                 <FieldBlock
-                  key={key}
+                  key={i}
                   name={key}
-                  context={[...context, key]}
+                  parentKeys={[...parentKeys, key]}
+                  parentLength={keys.length}
                   isArrayItem={Array.isArray(field)}
+                  isLastItem={keys.length - 1 === i}
                   field={field[key]}
                 />
               )
             })}
         </BracketsWrapper>
       ) : (
-        <Field name={name} value={field} context={context} />
+        <Field name={name} value={field} parentKeys={parentKeys} />
       )}
     </div>
   )

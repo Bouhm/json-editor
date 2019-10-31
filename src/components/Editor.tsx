@@ -1,6 +1,5 @@
 import React, { useContext } from 'react'
 import FieldBlock from './FieldBlock'
-import Field from './Field'
 import { Store } from './Store'
 
 const Editor = (props: any) => {
@@ -18,16 +17,20 @@ const Editor = (props: any) => {
     fontSize: '16px'
   }
 
+  const keys = Object.keys(state.data)
+
   return (
     <div style={style}>
-      {Object.keys(state.data).map(key => {
+      {keys.map((key, i) => {
         const field = state.data[key]
         return (
           <FieldBlock
-            key={key}
+            key={i}
             name={key}
-            context={[key]}
+            parentKeys={[key]}
+            parentLength={keys.length}
             isArrayItem={Array.isArray(field)}
+            isLastItem={keys.length - 1 === i}
             showBorder={false}
             field={field}
           />
