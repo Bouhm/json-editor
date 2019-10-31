@@ -16,13 +16,17 @@ const Field = (props: FieldProps) => {
 
   const handleInputChange = (e: React.FormEvent<HTMLInputElement>) => {
     setVal(e.currentTarget.value)
+  }
+
+  // Only update store on blur
+  const handleInputBlur = () => {
     let newData = state.data
     let target = newData
 
     for (let i = 0; i < context.length - 1; i++) {
       target = target[context[i]]
     }
-    target[context.slice(-1).pop()] = e.currentTarget.value
+    target[context.slice(-1).pop()] = val
 
     dispatch({ type: 'SET_DATA', payload: newData })
   }
@@ -34,7 +38,13 @@ const Field = (props: FieldProps) => {
   return (
     <FelaComponent style={style}>
       <label>{name}</label>:{' '}
-      <input type='text' onChange={handleInputChange} value={val} name={name} />
+      <input
+        type='text'
+        onChange={handleInputChange}
+        onBlur={handleInputBlur}
+        value={val}
+        name={name}
+      />
     </FelaComponent>
   )
 }

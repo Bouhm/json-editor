@@ -1,5 +1,6 @@
 import React, { useState, useReducer } from 'react'
 import { reducer, initialState } from './Store'
+import { Store } from './Store'
 
 const useInput = () => {
   const [input, setInput] = useState('')
