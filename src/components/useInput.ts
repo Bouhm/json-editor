@@ -1,19 +1,33 @@
-import React, { useState, useReducer } from 'react'
+import React, { useState, useContext } from 'react'
 import { reducer, initialState } from './Store'
 import { Store } from './Store'
 
-const useInput = () => {
-  const [input, setInput] = useState('')
-  const [state, dispatch] = useReducer(reducer, initialState)
+const useInput = (initialValue: string, context: string[]) => {
+  const [inputVal, setInputVal] = useState(initialValue)
+  const [state, dispatch] = useContext(Store)
 
   const handleInputChange = (e: React.FormEvent<HTMLInputElement>) => {
-    setInput(e.currentTarget.value)
-    dispatch({ type: 'CHANGE_DATA', payload: e.currentTarget.value })
+    setInputVal(e.currentTarget.value)
+  }
+
+  // Only update store on blur
+  const handleInputBlur = () => {
+    let newData = state.data
+    let target = newData
+
+    for (let i = 0; i < context.length - 1; i++) {
+      target = target[context[i]]
+    }
+
+    target[context[context.length - 1]] = inputVal
+
+    dispatch({ type: 'SET_DATA', payload: newData })
   }
 
   return {
-    input,
-    handleInputChange
+    inputVal,
+    handleInputChange,
+    handleInputBlur
   }
 }
 
