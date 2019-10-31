@@ -22,11 +22,11 @@ const Field = (props: FieldProps) => {
       lineHeight: '1.5em'
     },
     label: {
-      color: 'lightskyblue'
+      color: '#9cdcfe'
     },
     input: {
       backgroundColor: '#333333',
-      color: 'white',
+      color: '#ce824a',
       border: '1px solid #202020',
       borderRadius: '3px',
       outline: 'none'

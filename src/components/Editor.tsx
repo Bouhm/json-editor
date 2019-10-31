@@ -27,7 +27,7 @@ const Editor = (props: any) => {
             key={key}
             name={key}
             context={[key]}
-            isArray={Array.isArray(field)}
+            isArrayItem={Array.isArray(field)}
             showBorder={false}
             field={field}
           />
