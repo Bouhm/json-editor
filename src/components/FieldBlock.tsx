@@ -6,36 +6,41 @@ type FieldBlockProps = {
   name: string
   field: any
   isArray: boolean
+  showBorder?: boolean
   context: any // An array of keys to keep track of which portion of data
 }
 
 const FieldBlock = (props: FieldBlockProps) => {
-  const { field, name, context, isArray } = props
+  const { field, name, context, isArray, showBorder = true } = props
   const [isCollapsed, setCollapsed] = useState(false)
 
   const handleClick = () => {
     setCollapsed(!isCollapsed)
   }
 
-  const style = {
-    marginLeft: '1.5em'
-  }
-
-  const labelStyle = {
-    ':hover': {
-      backgroundColor: '#232323',
-      cursor: 'pointer'
+  const styles = {
+    fieldBlock: {
+      paddingLeft: '1.25em',
+      borderLeft: `${showBorder ? '1px solid #454545' : 'none'}`
+    },
+    blockLabel: {
+      ':hover': {
+        cursor: 'pointer'
+      },
+      height: '1.5em',
+      lineHeight: '1.5em',
+      color: 'lightskyblue'
     }
   }
 
   return (
-    <div style={style}>
+    <div style={styles.fieldBlock}>
       {typeof field === 'object' ? (
         <>
-          <FelaComponent style={labelStyle}>
-            <span onClick={handleClick}>
+          <FelaComponent style={styles.blockLabel}>
+            <div onClick={handleClick}>
               {isArray ? `${parseInt(name) + 1}.` : `${name}:`}
-            </span>
+            </div>
           </FelaComponent>
           {!isCollapsed &&
             Object.keys(field).map(key => {

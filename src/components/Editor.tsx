@@ -28,6 +28,7 @@ const Editor = (props: any) => {
             name={key}
             context={[key]}
             isArray={Array.isArray(field)}
+            showBorder={false}
             field={field}
           />
         )

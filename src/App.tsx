@@ -14,7 +14,7 @@ const App: React.FC = () => {
   }, [])
 
   const style = {
-    fontFamily: 'sans-serif',
+    fontFamily: 'Consolas,monaco,monospace',
     display: 'flex',
     flexFlow: 'column',
     padding: '0.5em',

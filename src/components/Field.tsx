@@ -16,14 +16,28 @@ const Field = (props: FieldProps) => {
     context
   )
 
-  const style = {
-    backgroundColor: '#2e2e2e'
+  const styles = {
+    field: {
+      height: '1.5em',
+      lineHeight: '1.5em'
+    },
+    label: {
+      color: 'lightskyblue'
+    },
+    input: {
+      backgroundColor: '#333333',
+      color: 'white',
+      border: '1px solid #202020',
+      borderRadius: '3px',
+      outline: 'none'
+    }
   }
 
   return (
-    <FelaComponent style={style}>
-      <label>{name}</label>:{' '}
+    <FelaComponent style={styles.field}>
+      <label style={styles.label}>{name}</label>:{' '}
       <input
+        style={styles.input}
         type='text'
         onChange={handleInputChange}
         onBlur={handleInputBlur}
