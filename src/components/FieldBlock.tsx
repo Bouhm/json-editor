@@ -30,7 +30,10 @@ const FieldBlock = (props: FieldBlockProps) => {
   const styles = {
     fieldBlock: {
       paddingLeft: '1.25em',
-      borderLeft: `${showBorder ? '1px solid #454545' : 'none'}`
+      borderLeft: `${showBorder ? '1px solid #454545' : 'none'}`,
+      ':hover': {
+        backgroundColor: 'rgba(100,100,100,0.05 )'
+      }
     },
     blockLabel: {
       ':hover': {
@@ -60,12 +63,20 @@ const FieldBlock = (props: FieldBlockProps) => {
           <div onClick={handleClick}>
             {name}
             <span style={styles.brackets}>: {bracket[0]}</span>
+            {isCollapsed && (
+              <span style={styles.brackets}>
+                &#8230;
+                {bracket[1] + (isLastItem ? '' : ',')}
+              </span>
+            )}
           </div>
         </FelaComponent>
         {props.children}
-        <span style={styles.brackets}>
-          {bracket[1] + (isLastItem ? '' : ',')}
-        </span>
+        {!isCollapsed && (
+          <span style={styles.brackets}>
+            {bracket[1] + (isLastItem ? '' : ',')}
+          </span>
+        )}
       </>
     )
   }
@@ -73,7 +84,7 @@ const FieldBlock = (props: FieldBlockProps) => {
   const keys = Object.keys(field)
 
   return (
-    <div style={styles.fieldBlock}>
+    <FelaComponent style={styles.fieldBlock}>
       {typeof field === 'object' ? (
         <BracketsWrapper field={field}>
           {!isCollapsed &&
@@ -94,7 +105,7 @@ const FieldBlock = (props: FieldBlockProps) => {
       ) : (
         <Field name={name} value={field} parentKeys={parentKeys} />
       )}
-    </div>
+    </FelaComponent>
   )
 }
 
