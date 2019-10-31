@@ -14,7 +14,8 @@ const Editor = (props: any) => {
     backgroundColor: '#1e1e1e',
     boxShadow: 'inset 0 0 5px #101010',
     borderRadius: '5px',
-    fontSize: '16px'
+    fontSize: '16px',
+    scrollbarColor: '#2e2e2e #1e1e1e'
   }
 
   const keys = Object.keys(state.data)

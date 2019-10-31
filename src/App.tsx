@@ -19,7 +19,7 @@ const App: React.FC = () => {
     flexFlow: 'column',
     padding: '0.5em',
     width: '100vw',
-    height: 'calc(100vh',
+    height: '100vh',
     alignItems: 'center',
     color: 'white'
   }
