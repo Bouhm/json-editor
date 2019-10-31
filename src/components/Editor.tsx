@@ -1,18 +1,16 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import FieldBlock from './FieldBlock'
 import Field from './Field'
-import { FelaComponent } from 'react-fela'
+import { Store } from './Store'
 
-type EditorProps = {
-  data: any
-}
+const Editor = (props: any) => {
+  const [state, dispatch] = useContext(Store)
 
-const Editor = (props: EditorProps) => {
   const style = {
     flex: '5',
     padding: '1em',
     width: '7 0%',
-    minWidth: '50em',
+    minWidth: '40em',
     overflow: 'auto',
     backgroundColor: '#1e1e1e',
     boxShadow: 'inset 0 0 5px #101010',
@@ -22,8 +20,8 @@ const Editor = (props: EditorProps) => {
 
   return (
     <div style={style}>
-      {Object.keys(props.data).map(key => {
-        const field = props.data[key]
+      {Object.keys(state.data).map(key => {
+        const field = state.data[key]
         return (
           <FieldBlock
             key={key}

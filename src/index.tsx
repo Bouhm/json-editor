@@ -1,15 +1,18 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Provider } from 'react-fela'
+import { RendererProvider } from 'react-fela'
 import { createRenderer } from 'fela'
+import { StoreProvider } from './components/Store'
 import App from './App'
 import './index.css'
 
 const renderer = createRenderer()
 
 ReactDOM.render(
-  <Provider renderer={renderer}>
-    <App />
-  </Provider>,
+  <RendererProvider renderer={renderer}>
+    <StoreProvider>
+      <App />
+    </StoreProvider>
+  </RendererProvider>,
   document.getElementById('root')
 )

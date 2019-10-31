@@ -5,7 +5,6 @@ import { FelaComponent } from 'react-fela'
 
 const Sidebar = () => {
   const style = {
-    backgroundColor: 'gray',
     flex: 1,
     height: '100%'
   }

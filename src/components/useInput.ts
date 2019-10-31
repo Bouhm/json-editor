@@ -1,5 +1,5 @@
 import React, { useState, useReducer } from 'react'
-import { Store, reducer, initialState } from './Store'
+import { reducer, initialState } from './Store'
 
 const useInput = () => {
   const [input, setInput] = useState('')
@@ -7,7 +7,7 @@ const useInput = () => {
 
   const handleInputChange = (e: React.FormEvent<HTMLInputElement>) => {
     setInput(e.currentTarget.value)
-    dispatch({ type: 'DATA_CHANGE' })
+    dispatch({ type: 'CHANGE_DATA', payload: e.currentTarget.value })
   }
 
   return {

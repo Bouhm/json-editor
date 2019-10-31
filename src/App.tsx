@@ -1,11 +1,18 @@
-import React, { useState, useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { FelaComponent } from 'react-fela'
 
 import Editor from './components/Editor'
 import Sidebar from './components/Sidebar'
+import { Store, reducer, initialState } from './components/Store'
 import sampleData from './data.json'
 
 const App: React.FC = () => {
+  const [state, dispatch] = useContext(Store)
+
+  useEffect(() => {
+    dispatch({ type: 'SET_DATA', payload: sampleData })
+  }, [])
+
   const style = {
     fontFamily: 'sans-serif',
     padding: '0.5em',
@@ -17,10 +24,10 @@ const App: React.FC = () => {
   }
 
   return (
-    <FelaComponent style={style}>
+    <div style={style}>
       <Sidebar />
-      <Editor data={sampleData} />
-    </FelaComponent>
+      <Editor />
+    </div>
   )
 }
 
