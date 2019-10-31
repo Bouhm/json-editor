@@ -26,6 +26,7 @@ const Editor = (props: any) => {
           <FieldBlock
             key={key}
             name={key}
+            context={[key]}
             isArray={Array.isArray(field)}
             field={field}
           />
