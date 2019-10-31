@@ -7,10 +7,10 @@ const Editor = (props: any) => {
   const [state, dispatch] = useContext(Store)
 
   const style = {
-    flex: '5',
     padding: '1em',
-    width: '7 0%',
+    width: '70%',
     minWidth: '40em',
+    flex: '1 1 auto',
     overflow: 'auto',
     backgroundColor: '#1e1e1e',
     boxShadow: 'inset 0 0 5px #101010',

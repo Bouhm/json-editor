@@ -3,10 +3,12 @@ import FieldBlock from './FieldBlock'
 import Field from './Field'
 import { FelaComponent } from 'react-fela'
 
-const Sidebar = () => {
+const Toolbar = () => {
   const style = {
-    flex: 1,
-    height: '100%'
+    width: '100%',
+    flex: '0 1 50px',
+    lineHeight: '50px',
+    'text-align': 'center'
   }
 
   return (
@@ -16,4 +18,4 @@ const Sidebar = () => {
   )
 }
 
-export default Sidebar
+export default Toolbar

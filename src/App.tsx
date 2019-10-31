@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import { FelaComponent } from 'react-fela'
 
 import Editor from './components/Editor'
-import Sidebar from './components/Sidebar'
+import Toolbar from './components/Toolbar'
 import { Store, reducer, initialState } from './components/Store'
 import sampleData from './data.json'
 
@@ -15,18 +15,19 @@ const App: React.FC = () => {
 
   const style = {
     fontFamily: 'sans-serif',
+    display: 'flex',
+    flexFlow: 'column',
     padding: '0.5em',
     width: '100vw',
-    height: '100vh',
-    display: 'flex',
-    justifyContent: 'center',
+    height: 'calc(100vh',
+    alignItems: 'center',
     color: 'white'
   }
 
   return (
     <div style={style}>
-      <Sidebar />
       <Editor />
+      <Toolbar />
     </div>
   )
 }
