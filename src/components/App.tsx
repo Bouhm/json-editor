@@ -1,9 +1,12 @@
 import React, { useContext, useEffect } from 'react'
 
 import Editor from './editor/Editor'
+import { Store } from './Store'
 import Toolbar from './tools/Toolbar'
 
 const App: React.FC = () => {
+  const [state, dispatch] = useContext(Store)
+
   const style = {
     fontFamily: 'Consolas,monaco,monospace',
     display: 'flex',
@@ -18,7 +21,7 @@ const App: React.FC = () => {
   return (
     <div style={style}>
       <Editor />
-      <Toolbar />
+      {state.data && <Toolbar />}
     </div>
   )
 }

@@ -10,7 +10,7 @@ interface IState {
 }
 
 export const initialState: IState = {
-  data: {}
+  data: undefined
 }
 
 export const Store = React.createContext<IState | any>(initialState)

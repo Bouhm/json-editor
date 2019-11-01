@@ -35,10 +35,7 @@ const Toolbar = () => {
 
     return (
       <div onClick={() => onClick(state.data)}>
-        <FelaComponent style={styles.button}>
-          <i className={`fas fa-${icon}`}></i>
-          {text}
-        </FelaComponent>
+        <FelaComponent style={styles.button}>{text}</FelaComponent>
       </div>
     )
   }

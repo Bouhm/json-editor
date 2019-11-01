@@ -8,16 +8,24 @@ const Dropzone = (props: any) => {
     accept
   })
 
+  const styles = {
+    container: {
+      border: '5px dashed gray',
+      height: '100%',
+      width: '100%',
+      display: 'flex',
+      justifyContent: 'center'
+    },
+    dropzone: {
+      cursor: 'pointer'
+    }
+  }
   return (
-    <div {...getRootProps()}>
-      <input className='dropzone-input' {...getInputProps()} />
-      {isDragActive ? (
-        <p className='dropzone-content'>Drop file here</p>
-      ) : (
-        <p className='dropzone-content'>
-          Drag and drop a JSON file here or click to select file
-        </p>
-      )}
+    <div style={styles.container} {...getRootProps()}>
+      <p style={styles.dropzone} className='dropzone-content'>
+        <input className='dropzone-input' {...getInputProps()} />
+        Drag-and-Drop a json file here or click to select file
+      </p>
     </div>
   )
 }

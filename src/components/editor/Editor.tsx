@@ -3,12 +3,10 @@ import Dropzone from '../tools/Dropzone'
 import FieldBlock from './FieldBlock'
 import { Store } from '../Store'
 
-const Editor = (props: any) => {
+const Editor = () => {
   const [state, dispatch] = useContext(Store)
 
   const handleFileSelect = useCallback(acceptedFiles => {
-    console.log(acceptedFiles)
-    // Loop through accepted files
     acceptedFiles.map((file: Blob) => {
       // Initialize FileReader browser API
       const reader = new FileReader()
@@ -35,26 +33,27 @@ const Editor = (props: any) => {
     scrollbarColor: '#2e2e2e #1e1e1e'
   }
 
-  const keys = Object.keys(state.data)
-
   return (
     <div style={style}>
-      <Dropzone onDrop={handleFileSelect} accept='application/json' />
-      {keys.map((key, i) => {
-        const field = state.data[key]
-        return (
-          <FieldBlock
-            key={i}
-            name={key}
-            parentKeys={[key]}
-            parentLength={keys.length}
-            isArrayItem={Array.isArray(field)}
-            isLastItem={keys.length - 1 === i}
-            showBorder={false}
-            field={field}
-          />
-        )
-      })}
+      {!state.data ? (
+        <Dropzone onDrop={handleFileSelect} accept='application/json' />
+      ) : (
+        Object.keys(state.data).map((key, i) => {
+          const field = state.data[key]
+          return (
+            <FieldBlock
+              key={i}
+              name={key}
+              parentKeys={[key]}
+              parentLength={Object.keys(state.data).length}
+              isArrayItem={Array.isArray(field)}
+              isLastItem={Object.keys(state.data).length - 1 === i}
+              showBorder={false}
+              field={field}
+            />
+          )
+        })
+      )}
     </div>
   )
 }
