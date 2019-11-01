@@ -1,14 +1,17 @@
 import React, { useContext } from 'react'
+import Dropzone from './Dropzone'
 import FieldBlock from './FieldBlock'
 import { Store } from '../Store'
 
 const Editor = (props: any) => {
   const [state, dispatch] = useContext(Store)
 
+  const handleFileDrop = () => {}
+
   const style = {
     padding: '1em',
-    width: '70%',
-    minWidth: '40em',
+    width: '50%',
+    minWidth: '30em',
     flex: '1 1 auto',
     overflow: 'auto',
     backgroundColor: '#1e1e1e',
