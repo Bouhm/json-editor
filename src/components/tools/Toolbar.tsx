@@ -35,18 +35,17 @@ const Toolbar = () => {
 
     return (
       <div onClick={() => onClick(state.data)}>
-        <FelaComponent style={styles.button}>{text}</FelaComponent>
+        <FelaComponent style={styles.button}>
+          <i className={`${icon} icon`}></i>
+          {text}
+        </FelaComponent>
       </div>
     )
   }
 
   return (
     <div style={styles.toolbar}>
-      <Button
-        onClick={handleExportData}
-        icon='file-download'
-        text='Export JSON'
-      />
+      <Button onClick={handleExportData} icon='download' text='Export JSON' />
     </div>
   )
 }

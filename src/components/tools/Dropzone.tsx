@@ -14,7 +14,9 @@ const Dropzone = (props: any) => {
       height: '100%',
       width: '100%',
       display: 'flex',
-      justifyContent: 'center'
+      flexFlow: 'column',
+      justifyContent: 'center',
+      textAlign: 'center' as const
     },
     dropzone: {
       cursor: 'pointer'
@@ -25,6 +27,9 @@ const Dropzone = (props: any) => {
       <p style={styles.dropzone} className='dropzone-content'>
         <input className='dropzone-input' {...getInputProps()} />
         Drag-and-Drop a json file here or click to select file
+        <div style={{ padding: '3em' }}>
+          <i className='huge upload icon'></i>
+        </div>
       </p>
     </div>
   )
