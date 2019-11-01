@@ -34,8 +34,7 @@ const Editor = () => {
 
   const style = {
     padding: '1em',
-    width: '70%',
-    minWidth: '30em',
+    minWidth: '50%',
     flex: '1 1 auto',
     overflow: 'auto',
     backgroundColor: '#1e1e1e',
