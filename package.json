@@ -2,7 +2,7 @@
   "name": "json-editor",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://github.com/Bouhm/json-editor",
+  "homepage": "https://bouhm.github.io/json-editor/",
   "dependencies": {
     "@types/jest": "24.0.20",
     "@types/node": "12.11.7",
