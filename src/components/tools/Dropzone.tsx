@@ -2,7 +2,7 @@ import React from 'react'
 import { useDropzone } from 'react-dropzone'
 
 const Dropzone = (props: any) => {
-  const { onDrop, accept } = props
+  const { onDrop, accept, errors, isLoading } = props
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
     accept
@@ -30,6 +30,13 @@ const Dropzone = (props: any) => {
         <div style={{ padding: '3em' }}>
           <i className='huge upload icon'></i>
         </div>
+        {errors ? (
+          <div style={{ color: 'red', maxWidth: '50%', margin: '0 auto' }}>
+            {errors}
+          </div>
+        ) : (
+          <>{isLoading && <span>Importing file...</span>}</>
+        )}
       </div>
     </div>
   )

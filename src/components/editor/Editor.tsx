@@ -1,12 +1,17 @@
-import React, { useContext, useCallback } from 'react'
+import React, { useState, useContext, useCallback } from 'react'
 import Dropzone from '../tools/Dropzone'
 import FieldBlock from './FieldBlock'
 import { Store } from '../Store'
 
 const Editor = () => {
   const [state, dispatch] = useContext(Store)
+  const [isLoading, setIsLoading] = useState(false)
+  const [errors, setErrors] = useState('')
 
   const handleFileSelect = useCallback(acceptedFiles => {
+    setErrors('')
+    setIsLoading(true)
+
     acceptedFiles.map((file: any) => {
       const reader = new FileReader()
 
@@ -16,8 +21,10 @@ const Editor = () => {
           let data = JSON.parse(e.target.result)
           dispatch({ type: 'SET_NAME', payload: file.name })
           dispatch({ type: 'CHANGE_DATA', payload: data })
+          setIsLoading(false)
         } catch (error) {
           console.error(error)
+          setErrors(error.toString())
         }
       })(file)
 
@@ -41,7 +48,12 @@ const Editor = () => {
   return (
     <div style={style}>
       {!state.data ? (
-        <Dropzone onDrop={handleFileSelect} accept='application/json' />
+        <Dropzone
+          isLoading={isLoading}
+          errors={errors}
+          onDrop={handleFileSelect}
+          accept='application/json'
+        />
       ) : (
         Object.keys(state.data).map((key, i) => {
           const field = state.data[key]
