@@ -11,10 +11,14 @@ const Editor = () => {
       const reader = new FileReader()
 
       reader.onload = (file => (e: any) => {
-        // Set data and filename in store
-        let data = JSON.parse(e.target.result)
-        dispatch({ type: 'SET_NAME', payload: file.name })
-        dispatch({ type: 'CHANGE_DATA', payload: data })
+        try {
+          // Set data and filename in store
+          let data = JSON.parse(e.target.result)
+          dispatch({ type: 'SET_NAME', payload: file.name })
+          dispatch({ type: 'CHANGE_DATA', payload: data })
+        } catch (error) {
+          console.error(error)
+        }
       })(file)
 
       reader.readAsText(file)
@@ -23,7 +27,7 @@ const Editor = () => {
 
   const style = {
     padding: '1em',
-    width: '50%',
+    width: '70%',
     minWidth: '30em',
     flex: '1 1 auto',
     overflow: 'auto',
@@ -47,7 +51,7 @@ const Editor = () => {
               name={key}
               parentKeys={[key]}
               parentLength={Object.keys(state.data).length}
-              isArrayItem={Array.isArray(field)}
+              isArrayItem={false}
               isLastItem={Object.keys(state.data).length - 1 === i}
               showBorder={false}
               field={field}

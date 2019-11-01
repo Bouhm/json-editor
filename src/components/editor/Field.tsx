@@ -6,10 +6,11 @@ type FieldProps = {
   name: string
   value: any
   parentKeys: string[]
+  isArrayItem: boolean
 }
 
 const Field = (props: FieldProps) => {
-  const { name, value, parentKeys } = props
+  const { name, value, isArrayItem, parentKeys } = props
   const { inputVal, inputColor, handleInputChange, handleInputBlur } = useInput(
     value,
     parentKeys
@@ -23,7 +24,9 @@ const Field = (props: FieldProps) => {
     },
     label: {
       display: 'inline-block',
-      color: '#9cdcfe'
+      color: `${isArrayItem ? '#c586c0' : '#9cdcfe'}`,
+      overflow: 'hidden',
+      textOverflow: 'ellipsis'
     },
     input: {
       paddingLeft: '0.3em',
@@ -37,7 +40,7 @@ const Field = (props: FieldProps) => {
 
   return (
     <FelaComponent style={styles.field}>
-      <span style={styles.label}>{`${name}: `}</span>
+      <span title={name} style={styles.label}>{`${name}: `}</span>
       <input
         style={styles.input}
         type='text'

@@ -106,7 +106,12 @@ const FieldBlock = (props: FieldBlockProps) => {
             })}
         </BracketsWrapper>
       ) : (
-        <Field name={name} value={field} parentKeys={parentKeys} />
+        <Field
+          name={name}
+          value={field}
+          isArrayItem={isArrayItem}
+          parentKeys={parentKeys}
+        />
       )}
     </FelaComponent>
   )
