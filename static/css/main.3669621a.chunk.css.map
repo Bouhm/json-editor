@@ -1,0 +1,1 @@
+{"version":3,"sources":["index.css"],"names":[],"mappings":"AAAA,KACE,QAAS,CACT,SAAU,CACV,eAAgB,CAChB,gBAAiB,CACjB,wBAAyB,CACzB,eACF,CAEA,EACE,qBACF","file":"main.3669621a.chunk.css","sourcesContent":["body {\n  margin: 0;\n  padding: 0;\n  max-width: 100vw;\n  max-height: 100vh;\n  background-color: #252526;\n  overflow: hidden;\n}\n\n* {\n  box-sizing: border-box;\n}\n"]}
