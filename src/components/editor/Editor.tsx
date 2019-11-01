@@ -7,12 +7,13 @@ const Editor = () => {
   const [state, dispatch] = useContext(Store)
 
   const handleFileSelect = useCallback(acceptedFiles => {
-    acceptedFiles.map((file: Blob) => {
-      // Initialize FileReader browser API
+    acceptedFiles.map((file: any) => {
       const reader = new FileReader()
-      // onload callback gets called after the reader reads the file data
+
       reader.onload = (file => (e: any) => {
+        // Set data and filename in store
         let data = JSON.parse(e.target.result)
+        dispatch({ type: 'SET_NAME', payload: file.name })
         dispatch({ type: 'CHANGE_DATA', payload: data })
       })(file)
 

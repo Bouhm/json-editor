@@ -24,13 +24,13 @@ const Dropzone = (props: any) => {
   }
   return (
     <div style={styles.container} {...getRootProps()}>
-      <p style={styles.dropzone} className='dropzone-content'>
+      <div style={styles.dropzone} className='dropzone-content'>
         <input className='dropzone-input' {...getInputProps()} />
         Drag-and-Drop a json file here or click to select file
         <div style={{ padding: '3em' }}>
           <i className='huge upload icon'></i>
         </div>
-      </p>
+      </div>
     </div>
   )
 }

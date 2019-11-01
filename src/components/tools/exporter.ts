@@ -1,16 +1,16 @@
-export const handleExportData = (data: any) => {
+export const handleExportData = (data: any, filename: string) => {
   const file = new Blob([JSON.stringify(data, null, 2)], {
     type: 'application/json'
   })
   if (window.navigator.msSaveOrOpenBlob)
     // IE10+
-    window.navigator.msSaveOrOpenBlob(file, '.json')
+    window.navigator.msSaveOrOpenBlob(file, filename)
   else {
     // Others
     let a = document.createElement('a'),
       url = URL.createObjectURL(file)
     a.href = url
-    a.download = '.json'
+    a.download = filename
     document.body.appendChild(a)
     a.click()
     setTimeout(() => {

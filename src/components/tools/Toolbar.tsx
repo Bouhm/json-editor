@@ -5,6 +5,7 @@ import { handleExportData } from './exporter'
 
 const Toolbar = () => {
   const [state, dispatch] = useContext(Store)
+  const { data, filename } = state
 
   const styles = {
     toolbar: {
@@ -45,7 +46,11 @@ const Toolbar = () => {
 
   return (
     <div style={styles.toolbar}>
-      <Button onClick={handleExportData} icon='download' text='Export JSON' />
+      <Button
+        onClick={() => handleExportData(data, filename)}
+        icon='download'
+        text='Export JSON'
+      />
     </div>
   )
 }

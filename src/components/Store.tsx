@@ -7,18 +7,20 @@ interface IAction {
 
 interface IState {
   data: any
+  filename: string
 }
 
 export const initialState: IState = {
-  data: undefined
+  data: undefined,
+  filename: ''
 }
 
 export const Store = React.createContext<IState | any>(initialState)
 
 export const reducer = (state: IState, action: IAction): IState => {
   switch (action.type) {
-    case 'SET_DATA':
-      return { ...state, data: action.payload }
+    case 'SET_NAME':
+      return { ...state, filename: action.payload }
     case 'CHANGE_DATA':
       return { ...state, data: action.payload }
     default:
