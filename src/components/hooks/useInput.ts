@@ -28,6 +28,13 @@ const getColorForValue = (value: any) => {
   return color
 }
 
+const unstringifyValue = (value: any) => {
+  if (!isNaN(value)) return parseFloat(value)
+  else if (value === 'true') return true
+  else if (value === 'false') return false
+  else return value
+}
+
 const useInput = (initialValue: ValueType, context: string[]) => {
   const [inputVal, setInputVal] = useState<ValueType>(initialValue)
   const [inputColor, setInputColor] = useState<string>(
@@ -52,7 +59,7 @@ const useInput = (initialValue: ValueType, context: string[]) => {
       target = target[context[i]]
     }
 
-    target[context[context.length - 1]] = inputVal
+    target[context[context.length - 1]] = unstringifyValue(inputVal)
 
     dispatch({ type: 'SET_DATA', payload: newData })
   }
