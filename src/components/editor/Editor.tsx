@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import FieldBlock from './FieldBlock'
-import { Store } from './Store'
+import { Store } from '../Store'
 
 const Editor = (props: any) => {
   const [state, dispatch] = useContext(Store)

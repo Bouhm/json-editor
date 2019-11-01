@@ -1,10 +1,10 @@
 import React, { useContext, useEffect } from 'react'
 import { FelaComponent } from 'react-fela'
 
-import Editor from './components/Editor'
-import Toolbar from './components/Toolbar'
-import { Store, reducer, initialState } from './components/Store'
-import sampleData from './data.json'
+import Editor from './editor/Editor'
+import Toolbar from './tools/Toolbar'
+import { Store, reducer, initialState } from './Store'
+import sampleData from '../data.json'
 
 const App: React.FC = () => {
   const [state, dispatch] = useContext(Store)

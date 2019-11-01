@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { FelaComponent } from 'react-fela'
+import { Store } from '../Store'
 
 const Toolbar = () => {
+  const [state, dispatch] = useContext(Store)
+
   const styles = {
     toolbar: {
       width: '100%',
