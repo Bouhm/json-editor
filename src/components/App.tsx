@@ -1,18 +1,9 @@
 import React, { useContext, useEffect } from 'react'
-import { FelaComponent } from 'react-fela'
 
 import Editor from './editor/Editor'
 import Toolbar from './tools/Toolbar'
-import { Store, reducer, initialState } from './Store'
-import sampleData from '../data.json'
 
 const App: React.FC = () => {
-  const [state, dispatch] = useContext(Store)
-
-  useEffect(() => {
-    dispatch({ type: 'SET_DATA', payload: sampleData })
-  }, [])
-
   const style = {
     fontFamily: 'Consolas,monaco,monospace',
     display: 'flex',

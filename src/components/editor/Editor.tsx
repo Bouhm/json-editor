@@ -1,12 +1,26 @@
-import React, { useContext } from 'react'
-import Dropzone from './Dropzone'
+import React, { useContext, useCallback } from 'react'
+import Dropzone from '../tools/Dropzone'
 import FieldBlock from './FieldBlock'
 import { Store } from '../Store'
 
 const Editor = (props: any) => {
   const [state, dispatch] = useContext(Store)
 
-  const handleFileDrop = () => {}
+  const handleFileSelect = useCallback(acceptedFiles => {
+    console.log(acceptedFiles)
+    // Loop through accepted files
+    acceptedFiles.map((file: Blob) => {
+      // Initialize FileReader browser API
+      const reader = new FileReader()
+      // onload callback gets called after the reader reads the file data
+      reader.onload = (file => (e: any) => {
+        let data = JSON.parse(e.target.result)
+        dispatch({ type: 'CHANGE_DATA', payload: data })
+      })(file)
+
+      reader.readAsText(file)
+    })
+  }, [])
 
   const style = {
     padding: '1em',
@@ -25,6 +39,7 @@ const Editor = (props: any) => {
 
   return (
     <div style={style}>
+      <Dropzone onDrop={handleFileSelect} accept='application/json' />
       {keys.map((key, i) => {
         const field = state.data[key]
         return (
