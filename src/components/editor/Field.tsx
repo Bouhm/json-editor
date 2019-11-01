@@ -10,22 +10,25 @@ type FieldProps = {
 
 const Field = (props: FieldProps) => {
   const { name, value, parentKeys } = props
-  const { inputVal, handleInputChange, handleInputBlur } = useInput(
+  const { inputVal, inputColor, handleInputChange, handleInputBlur } = useInput(
     value,
     parentKeys
   )
 
   const styles = {
     field: {
+      display: 'flex',
       height: '1.5em',
       lineHeight: '1.5em'
     },
     label: {
+      display: 'inline-block',
       color: '#9cdcfe'
     },
     input: {
+      paddingLeft: '0.3em',
       backgroundColor: '#333333',
-      color: '#ce824a',
+      color: `${inputColor}`,
       border: '1px solid #202020',
       borderRadius: '3px',
       outline: 'none'
@@ -34,7 +37,7 @@ const Field = (props: FieldProps) => {
 
   return (
     <FelaComponent style={styles.field}>
-      <label style={styles.label}>{name}</label>:{' '}
+      <span style={styles.label}>{`${name}: `}</span>
       <input
         style={styles.input}
         type='text'

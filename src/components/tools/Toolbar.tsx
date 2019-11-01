@@ -10,7 +10,6 @@ const Toolbar = () => {
     toolbar: {
       width: '100%',
       flex: '0 1 50px',
-      'text-align': 'center',
       display: 'flex',
       justifyContent: 'center'
     },
