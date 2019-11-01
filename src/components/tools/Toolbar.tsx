@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { FelaComponent } from 'react-fela'
 import { Store } from '../Store'
+import { handleExportData } from './exporter'
 
 const Toolbar = () => {
   const [state, dispatch] = useContext(Store)
@@ -30,20 +31,26 @@ const Toolbar = () => {
     }
   }
 
-  const Button = (props: { text: string; icon: string }) => {
-    const { text, icon } = props
+  const Button = (props: { onClick: Function; text: string; icon: string }) => {
+    const { text, icon, onClick } = props
 
     return (
-      <FelaComponent style={styles.button}>
-        <i className={`fas fa-${icon}`}></i>
-        {text}
-      </FelaComponent>
+      <div onClick={() => onClick(state.data)}>
+        <FelaComponent style={styles.button}>
+          <i className={`fas fa-${icon}`}></i>
+          {text}
+        </FelaComponent>
+      </div>
     )
   }
 
   return (
     <div style={styles.toolbar}>
-      <Button icon='file-download' text='Export JSON' />
+      <Button
+        onClick={handleExportData}
+        icon='file-download'
+        text='Export JSON'
+      />
     </div>
   )
 }

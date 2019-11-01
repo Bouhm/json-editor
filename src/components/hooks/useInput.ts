@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react'
-import { Store } from './Store'
+import { Store } from '../Store'
 
 export type ValueType = any
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import { FelaComponent } from 'react-fela'
-import useInput, { ValueType } from './useInput'
+import useInput, { ValueType } from '../hooks/useInput'
 
 type FieldProps = {
   name: string
