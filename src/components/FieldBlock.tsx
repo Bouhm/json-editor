@@ -32,7 +32,7 @@ const FieldBlock = (props: FieldBlockProps) => {
       paddingLeft: '1.25em',
       borderLeft: `${showBorder ? '1px solid #454545' : 'none'}`,
       ':hover': {
-        backgroundColor: 'rgba(100,100,100,0.1 )'
+        backgroundColor: 'rgba(100,100,100,0.05)'
       }
     },
     blockLabel: {
@@ -44,6 +44,9 @@ const FieldBlock = (props: FieldBlockProps) => {
       color: '#9cdcfe'
     },
     blockIndex: {
+      ':hover': {
+        cursor: 'pointer'
+      },
       color: '#c586c0'
     },
     brackets: {
