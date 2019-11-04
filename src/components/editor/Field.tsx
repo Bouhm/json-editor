@@ -1,6 +1,6 @@
 import React from 'react'
 import { FelaComponent } from 'react-fela'
-import useInput, { ValueType } from '../hooks/useInput'
+import useInput, { ValueType } from '../hooks/useField'
 
 type FieldProps = {
   name: string
@@ -11,10 +11,12 @@ type FieldProps = {
 
 const Field = (props: FieldProps) => {
   const { name, value, isArrayItem, parentKeys } = props
-  const { inputVal, inputColor, handleInputChange, handleInputBlur } = useInput(
-    value,
-    parentKeys
-  )
+  const {
+    inputVal,
+    inputColor,
+    handleInputChange,
+    handleFieldUpdate
+  } = useInput(value, parentKeys)
 
   const styles = {
     field: {
@@ -45,7 +47,7 @@ const Field = (props: FieldProps) => {
         style={styles.input}
         type='text'
         onChange={handleInputChange}
-        onBlur={handleInputBlur}
+        onBlur={handleFieldUpdate}
         value={inputVal}
         name={name}
       />
