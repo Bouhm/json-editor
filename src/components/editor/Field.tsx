@@ -33,6 +33,7 @@ const Field = (props: FieldProps) => {
     input: {
       paddingLeft: '0.3em',
       backgroundColor: '#333333',
+      minWidth: '33%',
       color: `${inputColor}`,
       border: '1px solid #202020',
       borderRadius: '3px',

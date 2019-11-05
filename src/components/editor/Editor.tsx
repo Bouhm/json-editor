@@ -4,6 +4,7 @@ import FieldBlock from './FieldBlock'
 import Button from '../ui/Button'
 import { Store } from '../Store'
 import NewField from './NewField'
+import { FelaComponent } from 'react-fela'
 
 const Editor = () => {
   const [state, dispatch] = useContext(Store)
@@ -41,18 +42,21 @@ const Editor = () => {
 
   const style = {
     padding: '1em',
-    minWidth: '50%',
     flex: '1 1 auto',
+    minWidth: '60%',
     overflow: 'auto',
     backgroundColor: '#1e1e1e',
     boxShadow: 'inset 0 0 5px #101010',
     borderRadius: '5px',
     fontSize: '16px',
-    scrollbarColor: '#2e2e2e #1e1e1e'
+    scrollbarColor: '#2e2e2e #1e1e1e',
+    '@media (max-width: 1024px)': {
+      width: '100%'
+    }
   }
 
   return (
-    <div style={style}>
+    <FelaComponent style={style}>
       {!state.data ? (
         <>
           <Dropzone
@@ -88,7 +92,7 @@ const Editor = () => {
           )}
         </>
       )}
-    </div>
+    </FelaComponent>
   )
 }
 

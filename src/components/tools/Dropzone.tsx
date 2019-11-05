@@ -11,6 +11,7 @@ const Dropzone = (props: any) => {
   const styles = {
     container: {
       border: '5px dashed gray',
+      outline: 'none',
       width: '100%',
       height: '90%',
       display: 'flex',
