@@ -26,8 +26,6 @@ const FieldBlock = (props: FieldBlockProps) => {
     showBorder = true
   } = props
   const [isCollapsed, setCollapsed] = useState(false)
-  const [isHovered, setIsHovered] = useState(false)
-  const [isEdit, setEdit] = useState(false)
 
   const handleClick = () => {
     setCollapsed(!isCollapsed)
@@ -100,18 +98,7 @@ const FieldBlock = (props: FieldBlockProps) => {
   ])
 
   return (
-    <FieldBlockContainer
-      onMouseOver={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      style={styles.fieldBlock}
-    >
-      {mode === 'edit' && (
-        <span style={{ position: 'absolute', right: 0 }}>
-          <Button color='red' size='small' onClick={() => setEdit(!isEdit)}>
-            <i className='delete icon'></i>
-          </Button>
-        </span>
-      )}
+    <FieldBlockContainer style={styles.fieldBlock}>
       {typeof field === 'object' ? (
         <BracketsWrapper field={field}>
           {!isCollapsed && (
