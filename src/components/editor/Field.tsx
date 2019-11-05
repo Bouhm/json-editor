@@ -1,6 +1,6 @@
 import React from 'react'
 import { FelaComponent } from 'react-fela'
-import useInput, { ValueType } from '../hooks/useField'
+import useField, { ValueType } from '../hooks/useField'
 
 type FieldProps = {
   name: string
@@ -16,7 +16,7 @@ const Field = (props: FieldProps) => {
     inputColor,
     handleInputChange,
     handleFieldUpdate
-  } = useInput(value, parentKeys)
+  } = useField(parentKeys, value)
 
   const styles = {
     field: {

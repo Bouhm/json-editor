@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { FelaComponent } from 'react-fela'
 import Field from './Field'
+import NewField from './NewField'
 
 type FieldBlockProps = {
   name: string
@@ -84,6 +85,7 @@ const FieldBlock = (props: FieldBlockProps) => {
     )
   }
 
+  //console.log(field)
   const keys = Object.keys(field)
 
   return (
@@ -104,6 +106,7 @@ const FieldBlock = (props: FieldBlockProps) => {
                 />
               )
             })}
+          <NewField parentKeys={parentKeys} />
         </BracketsWrapper>
       ) : (
         <Field

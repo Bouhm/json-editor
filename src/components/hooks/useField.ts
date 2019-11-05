@@ -4,6 +4,7 @@ import { Store } from '../Store'
 
 export type ValueType = any
 
+// Returns typeof given value based on its type or inferred type from if string
 const inferTypeFromString = (value: any) => {
   if (value === 'true' || value === 'false' || typeof value === 'boolean')
     return 'boolean'
@@ -11,6 +12,7 @@ const inferTypeFromString = (value: any) => {
   else return 'string'
 }
 
+// Returns color based on value's type of either string, number, or boolean
 const getColorForValue = (value: any) => {
   const type = inferTypeFromString(value)
   let color = '#ce824a'
@@ -29,6 +31,7 @@ const getColorForValue = (value: any) => {
   return color
 }
 
+// Returns literal value of given string (number or boolean)
 const unstringifyValue = (value: ValueType) => {
   if (!isNaN(value)) return parseFloat(value)
   else if (value === 'true') return true
@@ -36,7 +39,10 @@ const unstringifyValue = (value: ValueType) => {
   else return value
 }
 
-const useField = (initialValue: ValueType, context: string[]) => {
+const useField = (
+  parentKeys: string[],
+  initialValue: ValueType = undefined
+) => {
   const { inputVal, handleInputChange } = useInput(initialValue)
   const [inputColor, setFieldColor] = useState<string>(
     getColorForValue(inputVal)
@@ -51,19 +57,49 @@ const useField = (initialValue: ValueType, context: string[]) => {
     let newData = state.data
     let target = newData
 
-    for (let i = 0; i < context.length - 1; i++) {
-      target = target[context[i]]
+    for (let i = 0; i < parentKeys.length - 1; i++) {
+      target = target[parentKeys[i]]
     }
 
-    target[context[context.length - 1]] = unstringifyValue(inputVal)
+    target[parentKeys[parentKeys.length - 1]] = unstringifyValue(inputVal)
 
-    dispatch({ type: 'SET_DATA', payload: newData })
+    dispatch({ type: 'CHANGE_DATA', payload: newData })
+  }
+
+  const handleAddNewField = (field: any) => {
+    // Update store
+    let newData = state.data
+    let target = newData
+
+    for (let i = 0; i < parentKeys.length; i++) {
+      target = target[parentKeys[i]]
+    }
+
+    let inputVal: any
+    switch (field.type) {
+      case 'value':
+        inputVal = ''
+      case 'object':
+        inputVal = {}
+      case 'array':
+        inputVal = []
+      default:
+        inputVal = ''
+        break
+    }
+
+    console.log(target)
+    console.log(field)
+    target[field.name] = inputVal
+
+    dispatch({ type: 'CHANGE_DATA', payload: newData })
   }
 
   return {
     inputVal,
     handleInputChange,
     handleFieldUpdate,
+    handleAddNewField,
     inputColor
   }
 }

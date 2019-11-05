@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 
-export type ValueType = any
+const useInput = (initialValue = undefined) => {
+  const [inputVal, setInputVal] = useState<any>(initialValue)
 
-const useInput = (initialValue: ValueType = undefined) => {
-  const [inputVal, setInputVal] = useState<ValueType>(initialValue)
-
-  const handleInputChange = (e: React.FormEvent<HTMLInputElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     setInputVal(e.currentTarget.value)
   }
 
