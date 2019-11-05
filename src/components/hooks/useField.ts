@@ -82,17 +82,19 @@ const useField = (
     switch (field.type) {
       case 'value':
         inputVal = ''
+        break
       case 'object':
         inputVal = {}
+        break
       case 'array':
         inputVal = []
+        break
       default:
         inputVal = ''
         break
     }
 
-    console.log(target)
-    console.log(field)
+    console.log(field, inputVal)
     target[field.name] = inputVal
 
     dispatch({ type: 'CHANGE_DATA', payload: newData })

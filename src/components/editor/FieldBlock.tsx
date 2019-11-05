@@ -92,21 +92,24 @@ const FieldBlock = (props: FieldBlockProps) => {
     <FelaComponent style={styles.fieldBlock}>
       {typeof field === 'object' ? (
         <BracketsWrapper field={field}>
-          {!isCollapsed &&
-            keys.map((key, i) => {
-              return (
-                <FieldBlock
-                  key={i}
-                  name={key}
-                  parentKeys={[...parentKeys, key]}
-                  parentLength={keys.length}
-                  isArrayItem={Array.isArray(field)}
-                  isLastItem={keys.length - 1 === i}
-                  field={field[key]}
-                />
-              )
-            })}
-          <NewField parentKeys={parentKeys} />
+          {!isCollapsed && (
+            <>
+              {keys.map((key, i) => {
+                return (
+                  <FieldBlock
+                    key={i}
+                    name={key}
+                    parentKeys={[...parentKeys, key]}
+                    parentLength={keys.length}
+                    isArrayItem={Array.isArray(field)}
+                    isLastItem={keys.length - 1 === i}
+                    field={field[key]}
+                  />
+                )
+              })}
+              <NewField parentKeys={parentKeys} />
+            </>
+          )}
         </BracketsWrapper>
       ) : (
         <Field
