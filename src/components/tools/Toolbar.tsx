@@ -22,11 +22,11 @@ const Toolbar = () => {
       'text-align': 'center',
       width: '12em',
       margin: '0.5em 0.5em 0.5em 0',
-      backgroundColor: '#444',
+      backgroundColor: '#555',
       border: '3px solid #222',
       borderRadius: '7px',
       ':hover': {
-        backgroundColor: '#555'
+        backgroundColor: '#666'
       }
     }
   }
@@ -49,7 +49,7 @@ const Toolbar = () => {
       <Button
         onClick={() => handleExportData(data, filename)}
         icon='download'
-        text='Export JSON'
+        text='EXPORT JSON'
       />
     </div>
   )
