@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import useField from '../hooks/useField'
-import { FelaComponent } from 'react-fela'
+import Button from '../ui/Button'
 
 type NewFieldProps = {
   parentKeys: string[]
@@ -66,9 +66,7 @@ const NewField = (props: NewFieldProps) => {
         <option value='array'>array</option>
         <option value='object'>object</option>
       </select>
-      <FelaComponent as='button' style={styles.button} type='submit'>
-        ADD
-      </FelaComponent>
+      <Button size='small'>ADD</Button>
     </form>
   )
 }

@@ -2,56 +2,26 @@ import React, { useContext } from 'react'
 import { FelaComponent } from 'react-fela'
 import { Store } from '../Store'
 import { handleExportData } from './exporter'
+import Button from '../ui/Button'
 
 const Toolbar = () => {
   const [state, dispatch] = useContext(Store)
   const { data, filename } = state
 
-  const styles = {
-    toolbar: {
-      width: '100%',
-      flex: '0 1 50px',
-      display: 'flex',
-      justifyContent: 'center'
-    },
-    button: {
-      fontFamily: 'sans-serif',
-      fontSize: '16px',
-      lineHeight: '2.5em',
-      cursor: 'pointer',
-      'text-align': 'center',
-      width: '12em',
-      margin: '0.5em 0.5em 0.5em 0',
-      backgroundColor: '#555',
-      border: '3px solid #222',
-      borderRadius: '7px',
-      ':hover': {
-        backgroundColor: '#666'
-      }
-    }
-  }
-
-  const Button = (props: { onClick: Function; text: string; icon: string }) => {
-    const { text, icon, onClick } = props
-
-    return (
-      <div onClick={() => onClick(state.data)}>
-        <FelaComponent style={styles.button}>
-          <i className={`${icon} icon`}></i>
-          {text}
-        </FelaComponent>
-      </div>
-    )
+  const style = {
+    width: '100%',
+    flex: '0 1 50px',
+    display: 'flex',
+    justifyContent: 'center'
   }
 
   return (
-    <div style={styles.toolbar}>
-      <Button
-        onClick={() => handleExportData(data, filename)}
-        icon='download'
-        text='EXPORT JSON'
-      />
-    </div>
+    <FelaComponent style={style}>
+      <Button onClick={() => handleExportData(data, filename)}>
+        <i className='download icon'></i>
+        EXPORT JSON
+      </Button>
+    </FelaComponent>
   )
 }
 
