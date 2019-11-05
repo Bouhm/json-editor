@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import { FelaComponent } from 'react-fela'
+import { FelaComponent, createComponent } from 'react-fela'
 import Field from './Field'
 import NewField from './NewField'
+import Button from '../ui/Button'
 
 type FieldBlockProps = {
   name: string
@@ -10,6 +11,7 @@ type FieldBlockProps = {
   isLastItem: boolean
   showBorder?: boolean
   parentLength: number
+  mode: string
   parentKeys: string[] // An array of keys to keep track of which portion of data
 }
 
@@ -17,12 +19,15 @@ const FieldBlock = (props: FieldBlockProps) => {
   const {
     field,
     name,
+    mode,
     parentKeys,
     isArrayItem,
     isLastItem,
     showBorder = true
   } = props
   const [isCollapsed, setCollapsed] = useState(false)
+  const [isHovered, setIsHovered] = useState(false)
+  const [isEdit, setEdit] = useState(false)
 
   const handleClick = () => {
     setCollapsed(!isCollapsed)
@@ -30,6 +35,7 @@ const FieldBlock = (props: FieldBlockProps) => {
 
   const styles = {
     fieldBlock: {
+      position: 'relative' as const,
       paddingLeft: '1.25em',
       borderLeft: `${showBorder ? '1px solid #454545' : 'none'}`,
       ':hover': {
@@ -88,8 +94,24 @@ const FieldBlock = (props: FieldBlockProps) => {
   //console.log(field)
   const keys = Object.keys(field)
 
+  const FieldBlockContainer = createComponent(styles.fieldBlock, 'div', [
+    'onMouseOver',
+    'onMouseLeave'
+  ])
+
   return (
-    <FelaComponent style={styles.fieldBlock}>
+    <FieldBlockContainer
+      onMouseOver={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      style={styles.fieldBlock}
+    >
+      {mode === 'edit' && (
+        <span style={{ position: 'absolute', right: 0 }}>
+          <Button color='red' size='small' onClick={() => setEdit(!isEdit)}>
+            <i className='delete icon'></i>
+          </Button>
+        </span>
+      )}
       {typeof field === 'object' ? (
         <BracketsWrapper field={field}>
           {!isCollapsed && (
@@ -99,6 +121,7 @@ const FieldBlock = (props: FieldBlockProps) => {
                   <FieldBlock
                     key={i}
                     name={key}
+                    mode={mode}
                     parentKeys={[...parentKeys, key]}
                     parentLength={keys.length}
                     isArrayItem={Array.isArray(field)}
@@ -107,7 +130,7 @@ const FieldBlock = (props: FieldBlockProps) => {
                   />
                 )
               })}
-              <NewField parentKeys={parentKeys} />
+              {mode === 'edit' && <NewField parentKeys={parentKeys} />}
             </>
           )}
         </BracketsWrapper>
@@ -119,7 +142,7 @@ const FieldBlock = (props: FieldBlockProps) => {
           parentKeys={parentKeys}
         />
       )}
-    </FelaComponent>
+    </FieldBlockContainer>
   )
 }
 

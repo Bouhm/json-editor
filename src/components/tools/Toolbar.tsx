@@ -19,7 +19,21 @@ const Toolbar = () => {
     <FelaComponent style={style}>
       <Button onClick={() => handleExportData(data, filename)}>
         <i className='download icon'></i>
-        EXPORT JSON
+        Export JSON
+      </Button>
+      <Button
+        color={state.mode === 'simple' ? '#999' : null}
+        onClick={() => dispatch({ type: 'CHANGE_MODE', payload: 'simple' })}
+      >
+        <i className='pencil icon'></i>
+        Simple
+      </Button>
+      <Button
+        color={state.mode === 'edit' ? '#999' : null}
+        onClick={() => dispatch({ type: 'CHANGE_MODE', payload: 'edit' })}
+      >
+        <i className='pencil icon'></i>
+        Edit
       </Button>
     </FelaComponent>
   )

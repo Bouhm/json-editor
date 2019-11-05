@@ -17,6 +17,9 @@ const NewField = (props: NewFieldProps) => {
   }
 
   const styles = {
+    form: {
+      paddingLeft: '1.25em'
+    },
     input: {
       paddingLeft: '0.3em',
       backgroundColor: '#333',
@@ -24,18 +27,6 @@ const NewField = (props: NewFieldProps) => {
       borderRadius: '3px',
       outline: 'none',
       height: '1.5em'
-    },
-    button: {
-      height: '2em',
-      border: '1px solid #222',
-      borderRadius: '5px',
-      backgroundColor: '#555',
-      color: 'white',
-      marginLeft: '5px',
-      cursor: 'pointer',
-      ':hover': {
-        backgroundColor: '#666'
-      }
     }
   }
   return (
@@ -44,7 +35,7 @@ const NewField = (props: NewFieldProps) => {
         e.preventDefault()
         handleAddNewField(field)
       }}
-      style={{ paddingLeft: '1.25em' }}
+      style={styles.form}
     >
       <input
         style={{ ...styles.input, color: '#9cdcfe' }}
@@ -66,7 +57,9 @@ const NewField = (props: NewFieldProps) => {
         <option value='array'>array</option>
         <option value='object'>object</option>
       </select>
-      <Button size='small'>ADD</Button>
+      <Button size='small'>
+        <i className='check icon green'></i>
+      </Button>
     </form>
   )
 }

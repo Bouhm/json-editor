@@ -65,12 +65,12 @@ const Editor = () => {
               isArrayItem={false}
               isLastItem={Object.keys(state.data).length - 1 === i}
               showBorder={false}
+              mode={state.mode}
               field={field}
             />
           )
         })
       )}
-      <div>+</div>
     </div>
   )
 }
