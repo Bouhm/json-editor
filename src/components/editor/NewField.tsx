@@ -24,8 +24,11 @@ const NewField = (props: NewFieldProps) => {
     height: '1.5em'
   }
   return (
-    <div
-      onBlur={() => handleAddNewField(field)}
+    <form
+      onSubmit={e => {
+        e.preventDefault()
+        handleAddNewField(field)
+      }}
       style={{ paddingLeft: '1.25em' }}
     >
       <input
@@ -47,7 +50,7 @@ const NewField = (props: NewFieldProps) => {
         <option value='array'>array</option>
         <option value='object'>object</option>
       </select>
-    </div>
+    </form>
   )
 }
 

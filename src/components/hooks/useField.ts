@@ -33,7 +33,7 @@ const getColorForValue = (value: any) => {
 
 // Returns literal value of given string (number or boolean)
 const unstringifyValue = (value: ValueType) => {
-  if (!isNaN(value)) return parseFloat(value)
+  if (!isNaN(value)) return isNaN(parseFloat(value)) ? value : parseFloat(value)
   else if (value === 'true') return true
   else if (value === 'false') return false
   else return value
@@ -60,8 +60,11 @@ const useField = (
     for (let i = 0; i < parentKeys.length - 1; i++) {
       target = target[parentKeys[i]]
     }
+    //stackoverflow.com/questions/56297351/how-to-use-shouldcomponentupdate-with-react-hooks/56297625
 
-    target[parentKeys[parentKeys.length - 1]] = unstringifyValue(inputVal)
+    https: target[parentKeys[parentKeys.length - 1]] = unstringifyValue(
+      inputVal
+    )
 
     dispatch({ type: 'CHANGE_DATA', payload: newData })
   }
