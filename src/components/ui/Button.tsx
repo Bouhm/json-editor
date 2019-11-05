@@ -8,6 +8,7 @@ const button = (props: any) => ({
   textAlign: 'center' as const,
   backgroundColor: props.color || '#555',
   border: '3px solid #222',
+  outline: 'none',
   borderRadius: '6px',
   ':hover': {
     backgroundColor: props.color || '#666',

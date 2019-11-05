@@ -14,7 +14,7 @@ interface IState {
 export const initialState: IState = {
   data: undefined,
   filename: '',
-  mode: 'simple'
+  mode: 'normal'
 }
 
 export const Store = React.createContext<IState | any>(initialState)

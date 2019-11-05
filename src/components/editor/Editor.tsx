@@ -1,7 +1,9 @@
 import React, { useState, useContext, useCallback } from 'react'
 import Dropzone from '../tools/Dropzone'
 import FieldBlock from './FieldBlock'
+import Button from '../ui/Button'
 import { Store } from '../Store'
+import NewField from './NewField'
 
 const Editor = () => {
   const [state, dispatch] = useContext(Store)
@@ -32,6 +34,11 @@ const Editor = () => {
     })
   }, [])
 
+  const handleCreateNewClick = () => {
+    dispatch({ type: 'CHANGE_DATA', payload: {} })
+    dispatch({ type: 'CHANGE_MODE', payload: 'edit' })
+  }
+
   const style = {
     padding: '1em',
     minWidth: '50%',
@@ -47,29 +54,37 @@ const Editor = () => {
   return (
     <div style={style}>
       {!state.data ? (
-        <Dropzone
-          isLoading={isLoading}
-          errors={errors}
-          onDrop={handleFileSelect}
-          accept='application/json'
-        />
+        <>
+          <Dropzone
+            isLoading={isLoading}
+            errors={errors}
+            onDrop={handleFileSelect}
+            accept='application/json'
+          />
+          <div style={{ textAlign: 'center', marginTop: '1em' }}>
+            <Button onClick={handleCreateNewClick}>Create New JSON</Button>
+          </div>
+        </>
       ) : (
-        Object.keys(state.data).map((key, i) => {
-          const field = state.data[key]
-          return (
-            <FieldBlock
-              key={i}
-              name={key}
-              parentKeys={[key]}
-              parentLength={Object.keys(state.data).length}
-              isArrayItem={false}
-              isLastItem={Object.keys(state.data).length - 1 === i}
-              showBorder={false}
-              mode={state.mode}
-              field={field}
-            />
-          )
-        })
+        <>
+          {Object.keys(state.data).map((key, i) => {
+            const field = state.data[key]
+            return (
+              <FieldBlock
+                key={i}
+                name={key}
+                parentKeys={[key]}
+                parentLength={Object.keys(state.data).length}
+                isArrayItem={false}
+                isLastItem={Object.keys(state.data).length - 1 === i}
+                showBorder={false}
+                mode={state.mode}
+                field={field}
+              />
+            )
+          })}
+          {state.mode === 'edit' && <NewField parentKeys={[]} />}
+        </>
       )}
     </div>
   )
