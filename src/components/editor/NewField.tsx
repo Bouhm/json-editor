@@ -1,14 +1,17 @@
 import React, { useState } from 'react'
 import useField from '../hooks/useField'
 import Button from '../ui/Button'
+import { isArray } from 'util'
 
 type NewFieldProps = {
   parentKeys: string[]
+  isArrayItem: boolean
 }
 
 const NewField = (props: NewFieldProps) => {
+  const { parentKeys, isArrayItem } = props
   const [field, setField] = useState({ name: '', type: '' })
-  const { handleAddNewField } = useField(props.parentKeys)
+  const { handleAddNewField } = useField(parentKeys)
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -37,15 +40,17 @@ const NewField = (props: NewFieldProps) => {
       }}
       style={styles.form}
     >
-      <input
-        style={{ ...styles.input, color: '#9cdcfe' }}
-        name='name'
-        type='text'
-        value={field.name}
-        onChange={handleInputChange}
-        placeholder='new field'
-        required
-      />
+      {!isArrayItem && (
+        <input
+          style={{ ...styles.input, color: '#9cdcfe' }}
+          name='name'
+          type='text'
+          value={field.name}
+          onChange={handleInputChange}
+          placeholder='new field'
+          required
+        />
+      )}
       <select
         style={{ ...styles.input, color: 'white' }}
         name='type'

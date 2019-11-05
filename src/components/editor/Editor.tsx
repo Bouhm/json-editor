@@ -83,7 +83,9 @@ const Editor = () => {
               />
             )
           })}
-          {state.mode === 'edit' && <NewField parentKeys={[]} />}
+          {state.mode === 'edit' && (
+            <NewField isArrayItem={false} parentKeys={[]} />
+          )}
         </>
       )}
     </div>

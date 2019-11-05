@@ -94,8 +94,17 @@ const useField = (
         break
     }
 
-    console.log(field, inputVal)
-    target[field.name] = inputVal
+    // If parent is array, add to it
+    if (Array.isArray(target)) {
+      target.push(inputVal)
+    } else {
+      // Initialize empty array if newly created
+      if (field.type === 'array') {
+        target[field.name] = []
+      } else {
+        target[field.name] = inputVal
+      }
+    }
 
     dispatch({ type: 'CHANGE_DATA', payload: newData })
   }

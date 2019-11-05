@@ -3,6 +3,7 @@ import { FelaComponent, createComponent } from 'react-fela'
 import Field from './Field'
 import NewField from './NewField'
 import Button from '../ui/Button'
+import { isArray } from 'util'
 
 type FieldBlockProps = {
   name: string
@@ -117,7 +118,12 @@ const FieldBlock = (props: FieldBlockProps) => {
                   />
                 )
               })}
-              {mode === 'edit' && <NewField parentKeys={parentKeys} />}
+              {mode === 'edit' && (
+                <NewField
+                  isArrayItem={Array.isArray(field)}
+                  parentKeys={parentKeys}
+                />
+              )}
             </>
           )}
         </BracketsWrapper>
